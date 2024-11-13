@@ -15,6 +15,7 @@ const page = {
 
 /* utils */
 function loadData() {
+  // const data = 
   const habbitsString = localStorage.getItem(HABBIT_KEY);
   const habbitsArray = JSON.parse(habbitsString);
   if (Array.isArray(habbitsArray)) {
@@ -73,7 +74,18 @@ function renderHead(activeHabbit) {
 }
 
 // init
-(() => {
-  loadData();
-  rerender(habbits[0].id);
-})();
+// (() => {
+//   loadData();
+//   rerender(habbits[0].id);
+// })();
+
+fetch('data/demo.json')
+  .then(response => response.json())
+  .then(data => {
+    habbits = data;
+    for (const habbit of habbits) {
+      const newPost = document.createElement("div");
+      newPost.classList.add("post");
+    }
+  })
+  .catch(error => console.error(error));
